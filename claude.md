@@ -11,10 +11,21 @@ TypeScript monorepo using npm workspaces:
 ```
 packages/core       → @toolspec/core (pure engine library, zero I/O)
 packages/cli        → @toolspec/cli (Commander.js CLI, file loaders, reporters)
-packages/mcp-loader → @toolspec/mcp-loader (MCP SDK client, stdio/HTTP loaders)
-fixtures/           → Sample tool definition JSON files for testing
-docs/               → Documentation (VitePress, future)
+packages/mcp-loader → @toolspec/mcp-loader (MCP SDK client, stdio/HTTP loaders — stub)
+fixtures/           → Tool definition JSON files (hand-crafted + real MCP servers)
+docs/               → Documentation and presentation materials
 ```
+
+### Fixtures
+
+| File | Source | Score | Purpose |
+|------|--------|-------|---------|
+| `demo-tools.json` | Hand-crafted | 61.4/100 | Mixed quality, original test fixture |
+| `good-server.json` | Hand-crafted | 96.5/100 | Demo: what good looks like |
+| `bad-server.json` | Hand-crafted | 0/100 | Demo: what bad looks like |
+| `mcp-filesystem-server.json` | Official MCP repo | 74.9/100 | Real-world: 14 tools |
+| `mcp-github-server.json` | GitHub MCP server | 74.4/100 | Real-world: 16 tools |
+| `mcp-fetch-server.json` | Official MCP repo | 73/100 | Real-world: 1 tool |
 
 ## Key Architecture Decisions
 
@@ -65,8 +76,18 @@ npm run test             # Run all tests (vitest)
 npm run typecheck        # Type-check all packages (tsc --build)
 npm run lint             # Lint/format check (biome)
 
-# Run the CLI locally (after build):
+# Run the CLI (after build + npm link --workspace=packages/cli):
+toolspec lint fixtures/demo-tools.json
+toolspec lint fixtures/demo-tools.json --format json
+toolspec lint fixtures/demo-tools.json --quiet
+
+# Or without linking:
 node packages/cli/dist/index.js lint fixtures/demo-tools.json
+
+# Demo scripts:
+npm run lint:demo        # demo-tools.json (mixed quality)
+npm run lint:demo:good   # good-server.json (96.5/100)
+npm run lint:demo:bad    # bad-server.json (0/100)
 
 # Run a specific test file:
 npx vitest run packages/core/src/rules/__tests__/ts001-unclear-purpose.test.ts
@@ -83,11 +104,28 @@ npx vitest run packages/core/src/rules/__tests__/ts001-unclear-purpose.test.ts
 
 ## Rule Categories
 
-| Range    | Category                | Description                                    |
-|----------|------------------------|------------------------------------------------|
-| TS001–006 | Description quality    | Smell detection on natural-language descriptions |
-| TS101–106 | Schema structural      | JSON Schema validity and best practices          |
-| TS201–203 | Annotations & metadata | MCP-specific metadata completeness               |
+| Range     | Category             | Description                                      |
+|-----------|----------------------|--------------------------------------------------|
+| TS001–006 | Description quality  | Smell detection on natural-language descriptions |
+| TS101–105 | Schema structural    | JSON Schema validity and best practices          |
+| TS201–203 | Annotations & metadata | MCP-specific metadata completeness (planned)   |
+
+### Implemented Rules
+
+**Description quality (all implemented):**
+- TS001 `unclear-purpose` — missing, short, tautological, or verb-less descriptions
+- TS002 `unstated-limitations` — constraint-suggesting params without documented limits
+- TS003 `missing-usage-guidelines` — no when-to-use, differentiation, or workflow guidance
+- TS004 `opaque-parameters` — single-char, abbreviated, or undescribed parameter names
+- TS005 `missing-examples` — no examples (scaled by schema complexity)
+- TS006 `missing-error-guidance` — no output or error/failure documentation
+
+**Schema structural (all implemented):**
+- TS101 `schema-missing-type` — properties without `type` (breaks Azure Foundry, OpenAI strict)
+- TS102 `schema-missing-description` — properties without `description`
+- TS103 `schema-unsupported-keywords` — `anyOf`/`oneOf`/`allOf` usage
+- TS104 `schema-permissive-types` — bare objects or untyped arrays
+- TS105 `schema-missing-required` — object schemas with properties but no `required` array
 
 ## Dependencies
 
@@ -101,3 +139,14 @@ npx vitest run packages/core/src/rules/__tests__/ts001-unclear-purpose.test.ts
 | vitest                        | Testing                                    |
 | tsup                          | Building                                   |
 | @biomejs/biome                | Linting + formatting                       |
+
+## Research Basis
+
+The smell taxonomy and quality rubric are derived from:
+
+> **"MCP Tool Descriptions Are Smelly!"** — Hasan et al., Queen's University, 2025 (arXiv:2602.14878)
+>
+> Studied 856 tools across 103 MCP servers. Found 97.1% contain at least one description smell.
+> Augmenting descriptions improves agent task success by +5.85pp but increases execution steps by 67.5%.
+
+The six smell categories (unclear purpose, unstated limitations, missing usage guidelines, opaque parameters, missing examples, undocumented output) map directly to rules TS001–TS006.
