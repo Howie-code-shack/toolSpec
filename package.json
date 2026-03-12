@@ -1,0 +1,29 @@
+{
+  "name": "toolspec-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "MCP Tool Schema Governance & Quality Platform",
+  "workspaces": [
+    "packages/core",
+    "packages/cli",
+    "packages/mcp-loader"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --build",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "clean": "rm -rf packages/*/dist"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.0",
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0",
+    "tsup": "^8.3.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

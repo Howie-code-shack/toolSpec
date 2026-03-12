@@ -1,0 +1,39 @@
+{
+  "name": "@toolspec/core",
+  "version": "0.1.0",
+  "description": "MCP tool schema linting and quality scoring engine",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./rules": {
+      "types": "./dist/rules/index.d.ts",
+      "import": "./dist/rules/index.js"
+    },
+    "./types": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/types/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "ajv": "^8.17.0",
+    "ajv-formats": "^3.0.0"
+  },
+  "devDependencies": {
+    "vitest": "^2.1.0",
+    "tsup": "^8.3.0",
+    "typescript": "^5.6.0"
+  },
+  "files": ["dist"],
+  "license": "MIT"
+}

@@ -1,0 +1,88 @@
+{
+  "serverName": "demo-api-server",
+  "serverVersion": "1.0.0",
+  "tools": [
+    {
+      "name": "get_user",
+      "description": "Retrieves a user profile by ID from the users database. Returns the user's name, email address, role, and last login timestamp. Requires a valid user ID.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "description": "The unique identifier of the user to retrieve"
+          }
+        },
+        "required": ["userId"]
+      }
+    },
+    {
+      "name": "search_documents",
+      "description": "search documents",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string"
+          },
+          "limit": {
+            "type": "integer"
+          }
+        }
+      }
+    },
+    {
+      "name": "create_ticket",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          },
+          "priority": {
+            "type": "string",
+            "enum": ["low", "medium", "high", "critical"]
+          }
+        },
+        "required": ["title"]
+      }
+    },
+    {
+      "name": "update_config",
+      "description": "Config updater.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "Configuration key"
+          },
+          "value": {
+            "description": "The new value to set"
+          }
+        },
+        "required": ["key", "value"]
+      }
+    },
+    {
+      "name": "analyse_sentiment",
+      "description": "The sentiment analysis functionality for processing text content and determining emotional tone characteristics within the provided input data.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "description": "The text to analyse for sentiment"
+          },
+          "lang": {
+            "type": "string"
+          }
+        },
+        "required": ["text"]
+      }
+    }
+  ]
+}

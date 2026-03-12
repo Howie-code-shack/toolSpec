@@ -1,0 +1,23 @@
+{
+  "name": "@toolspec/mcp-loader",
+  "version": "0.1.0",
+  "description": "Load tool definitions from live MCP servers via stdio or HTTP",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@toolspec/core": "*"
+  },
+  "devDependencies": {
+    "vitest": "^2.1.0",
+    "tsup": "^8.3.0",
+    "typescript": "^5.6.0"
+  },
+  "files": ["dist"],
+  "license": "MIT"
+}
