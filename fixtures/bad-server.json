@@ -1,0 +1,123 @@
+{
+  "serverName": "legacy-internal-api",
+  "serverVersion": "0.3.1",
+  "tools": [
+    {
+      "name": "query",
+      "description": "query",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "q": {
+            "type": "string"
+          },
+          "n": {
+            "type": "integer"
+          },
+          "f": {}
+        }
+      }
+    },
+    {
+      "name": "update",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "data": {
+            "type": "object"
+          },
+          "opts": {
+            "type": "object",
+            "properties": {
+              "mode": {
+                "anyOf": [
+                  { "type": "string" },
+                  { "type": "integer" }
+                ]
+              },
+              "flags": {
+                "type": "array"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "proc",
+      "description": "Process.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "in": {
+            "type": "string"
+          },
+          "cb": {},
+          "x": {},
+          "fmt": {
+            "type": "string"
+          },
+          "p1": {},
+          "p2": {}
+        }
+      }
+    },
+    {
+      "name": "get_data",
+      "description": "The data retrieval functionality module for accessing various information records stored within the system infrastructure components.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "src": {
+            "type": "string"
+          },
+          "tgt": {
+            "type": "string"
+          },
+          "maxRetries": {
+            "type": "integer"
+          },
+          "batchSize": {
+            "type": "integer"
+          },
+          "timeout": {
+            "type": "integer"
+          },
+          "format": {
+            "type": "string"
+          },
+          "compress": {
+            "type": "boolean"
+          },
+          "validate": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    {
+      "name": "send_msg",
+      "description": "A tool for sending messages.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "to": {
+            "type": "string"
+          },
+          "body": {
+            "type": "string"
+          },
+          "cc": {
+            "type": "array"
+          },
+          "meta": {
+            "type": "object"
+          }
+        }
+      }
+    }
+  ]
+}

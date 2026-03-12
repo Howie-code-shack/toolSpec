@@ -1,0 +1,97 @@
+{
+  "serverName": "acme-crm",
+  "serverVersion": "2.1.0",
+  "tools": [
+    {
+      "name": "get_contact",
+      "description": "Retrieves a contact record by ID from the CRM database. Returns a JSON object with fields: name, email, phone, company, and lastContactedAt. Use this tool when you need to look up a specific person's details. Returns an error if the contact ID does not exist.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "contactId": {
+            "type": "string",
+            "description": "The unique identifier of the contact to retrieve, e.g. 'contact_8xK2mP'"
+          }
+        },
+        "required": ["contactId"]
+      }
+    },
+    {
+      "name": "search_contacts",
+      "description": "Searches the CRM contacts by name, email, or company. Returns a paginated array of matching contact objects. Use this instead of get_contact when you don't have the exact ID. Rate limited to 60 requests per minute. Example: {\"query\": \"Jane Doe\", \"limit\": 10}",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Free-text search query matched against name, email, and company fields"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Maximum number of results to return (1-100, default 20)"
+          },
+          "offset": {
+            "type": "integer",
+            "description": "Number of results to skip for pagination (default 0)"
+          }
+        },
+        "required": ["query"]
+      }
+    },
+    {
+      "name": "create_deal",
+      "description": "Creates a new sales deal in the CRM pipeline. Returns the created deal object with a generated dealId. Requires at least a title and contactId. Use this after qualifying a lead through the search_contacts tool. Fails with a validation error if the contactId does not reference an existing contact.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Short name for the deal, e.g. 'Acme Corp - Enterprise License'"
+          },
+          "contactId": {
+            "type": "string",
+            "description": "The ID of the primary contact associated with this deal"
+          },
+          "value": {
+            "type": "number",
+            "description": "Estimated deal value in USD"
+          },
+          "stage": {
+            "type": "string",
+            "description": "Pipeline stage for the deal",
+            "enum": ["prospecting", "qualification", "proposal", "negotiation", "closed-won", "closed-lost"],
+            "default": "prospecting"
+          }
+        },
+        "required": ["title", "contactId"]
+      }
+    },
+    {
+      "name": "list_activities",
+      "description": "Lists recent activities (calls, emails, meetings) for a given contact or deal. Returns an array of activity objects sorted by date descending, each containing type, subject, date, and notes. Use this to review interaction history before reaching out. Limited to the last 90 days of activity.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "contactId": {
+            "type": "string",
+            "description": "Filter activities by this contact ID"
+          },
+          "dealId": {
+            "type": "string",
+            "description": "Filter activities by this deal ID"
+          },
+          "type": {
+            "type": "string",
+            "description": "Filter by activity type",
+            "enum": ["call", "email", "meeting", "note"]
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Maximum activities to return (1-50, default 20)"
+          }
+        },
+        "required": []
+      }
+    }
+  ]
+}

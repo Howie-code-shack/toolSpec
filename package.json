@@ -15,7 +15,11 @@
     "typecheck": "tsc --build",
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
-    "clean": "rm -rf packages/*/dist"
+    "clean": "rm -rf packages/*/dist",
+    "toolspec": "node packages/cli/dist/index.js",
+    "lint:demo": "node packages/cli/dist/index.js lint fixtures/demo-tools.json",
+    "lint:demo:good": "node packages/cli/dist/index.js lint fixtures/good-server.json",
+    "lint:demo:bad": "node packages/cli/dist/index.js lint fixtures/bad-server.json"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.0",
