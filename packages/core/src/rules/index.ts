@@ -1,10 +1,22 @@
 import type { Diagnostic, Rule, RuleSeverityOverride, ToolDefinition } from "../types/index.js";
 import { ts001UnclearPurpose } from "./ts001-unclear-purpose.js";
+import { ts002UnstatedLimitations } from "./ts002-unstated-limitations.js";
+import { ts003MissingUsageGuidelines } from "./ts003-missing-usage-guidelines.js";
+import { ts004OpaqueParameters } from "./ts004-opaque-parameters.js";
+import { ts005MissingExamples } from "./ts005-missing-examples.js";
+import { ts006MissingErrorGuidance } from "./ts006-missing-error-guidance.js";
 
 /**
  * All built-in rules. New rules are registered here.
  */
-const BUILT_IN_RULES: Rule[] = [ts001UnclearPurpose];
+const BUILT_IN_RULES: Rule[] = [
+	ts001UnclearPurpose,
+	ts002UnstatedLimitations,
+	ts003MissingUsageGuidelines,
+	ts004OpaqueParameters,
+	ts005MissingExamples,
+	ts006MissingErrorGuidance,
+];
 
 export interface RuleRegistryOptions {
 	/** Per-rule severity overrides. Set to "off" to disable a rule. */

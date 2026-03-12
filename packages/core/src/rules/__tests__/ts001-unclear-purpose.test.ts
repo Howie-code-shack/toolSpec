@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { ts001UnclearPurpose } from "../ts001-unclear-purpose.js";
 import type { ToolDefinition } from "../../types/index.js";
+import { ts001UnclearPurpose } from "../ts001-unclear-purpose.js";
 
 /** Helper to create a minimal tool definition for testing */
 function makeTool(overrides: Partial<ToolDefinition> = {}): ToolDefinition {
@@ -77,7 +77,7 @@ describe("TS001: unclear-purpose", () => {
 			const diags = ts001UnclearPurpose.check(tool);
 			const shortDiag = diags.find((d) => d.message.includes("characters"));
 			expect(shortDiag).toBeDefined();
-			expect(shortDiag!.severity).toBe("warning");
+			expect(shortDiag?.severity).toBe("warning");
 		});
 
 		it("should not flag descriptions at exactly the minimum length", () => {
@@ -98,7 +98,7 @@ describe("TS001: unclear-purpose", () => {
 			const diags = ts001UnclearPurpose.check(tool);
 			const tautDiag = diags.find((d) => d.message.includes("tautological"));
 			expect(tautDiag).toBeDefined();
-			expect(tautDiag!.severity).toBe("error");
+			expect(tautDiag?.severity).toBe("error");
 		});
 
 		it("should flag 'Tool to <name>' patterns", () => {
@@ -137,12 +137,13 @@ describe("TS001: unclear-purpose", () => {
 		it("should warn about descriptions without action verbs", () => {
 			const tool = makeTool({
 				name: "user_profile",
-				description: "The user profile information including name, email, and role from the database.",
+				description:
+					"The user profile information including name, email, and role from the database.",
 			});
 			const diags = ts001UnclearPurpose.check(tool);
 			const verbDiag = diags.find((d) => d.message.includes("action verb"));
 			expect(verbDiag).toBeDefined();
-			expect(verbDiag!.severity).toBe("warning");
+			expect(verbDiag?.severity).toBe("warning");
 		});
 
 		it("should not flag descriptions that contain a verb", () => {
@@ -183,7 +184,7 @@ describe("TS001: unclear-purpose", () => {
 			const diags = ts001UnclearPurpose.check(tool);
 			for (const diag of diags) {
 				expect(diag.suggestion).toBeDefined();
-				expect(diag.suggestion!.length).toBeGreaterThan(0);
+				expect(diag.suggestion?.length).toBeGreaterThan(0);
 			}
 		});
 	});

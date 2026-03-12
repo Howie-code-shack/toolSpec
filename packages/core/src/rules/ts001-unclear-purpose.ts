@@ -161,7 +161,8 @@ export const ts001UnclearPurpose: Rule = {
 				...base,
 				severity: "warning",
 				message: `Tool "${tool.name}" description is only ${desc.length} characters. Descriptions under ${MIN_DESCRIPTION_LENGTH} characters rarely convey enough information for reliable tool selection.`,
-				suggestion: `Expand the description to explain what the tool does, what parameters it expects, and what it returns.`,
+				suggestion:
+					"Expand the description to explain what the tool does, what parameters it expects, and what it returns.",
 			});
 		}
 
