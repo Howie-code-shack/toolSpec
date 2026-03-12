@@ -35,5 +35,12 @@
     "typescript": "^5.6.0"
   },
   "files": ["dist"],
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Howie-code-shack/toolSpec.git",
+    "directory": "packages/core"
+  },
+  "homepage": "https://github.com/Howie-code-shack/toolSpec#readme",
+  "keywords": ["mcp", "model-context-protocol", "linting", "tool-schema", "validation", "quality"]
 }
