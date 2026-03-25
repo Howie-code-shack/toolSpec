@@ -1,6 +1,6 @@
 {
   "name": "@toolspec/mcp-loader",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Load tool definitions from live MCP servers via stdio or HTTP",
   "type": "module",
   "main": "./dist/index.js",
