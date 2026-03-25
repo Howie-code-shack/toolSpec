@@ -88,6 +88,7 @@ export type SmellCategory =
 	| "missing-examples"
 	| "missing-error-guidance"
 	| "schema-structural"
+	| "client-compat"
 	| "metadata";
 
 // ---------------------------------------------------------------------------

@@ -28,6 +28,7 @@ const ALL_CATEGORIES: SmellCategory[] = [
 	"missing-examples",
 	"missing-error-guidance",
 	"schema-structural",
+	"client-compat",
 	"metadata",
 ];
 

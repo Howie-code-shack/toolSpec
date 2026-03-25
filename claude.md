@@ -108,7 +108,7 @@ npx vitest run packages/core/src/rules/__tests__/ts001-unclear-purpose.test.ts
 |-----------|----------------------|--------------------------------------------------|
 | TS001–006 | Description quality  | Smell detection on natural-language descriptions |
 | TS101–105 | Schema structural    | JSON Schema validity and best practices          |
-| TS201–203 | Annotations & metadata | MCP-specific metadata completeness (planned)   |
+| TS201–203 | Client compatibility   | Cross-client schema compat (OpenAI strict, Azure AI Foundry) |
 
 ### Implemented Rules
 
@@ -126,6 +126,11 @@ npx vitest run packages/core/src/rules/__tests__/ts001-unclear-purpose.test.ts
 - TS103 `schema-unsupported-keywords` — `anyOf`/`oneOf`/`allOf` usage
 - TS104 `schema-permissive-types` — bare objects or untyped arrays
 - TS105 `schema-missing-required` — object schemas with properties but no `required` array
+
+**Client compatibility (all implemented):**
+- TS201 `compat-additional-properties` — objects missing `additionalProperties: false` (OpenAI strict)
+- TS202 `compat-ref-usage` — `$ref` usage unsupported in OpenAI strict mode
+- TS203 `compat-required-all` — properties not listed in `required` array (OpenAI strict)
 
 ## Dependencies
 

@@ -10,6 +10,9 @@ import { ts102SchemaMissingDescription } from "./ts102-schema-missing-descriptio
 import { ts103SchemaUnsupportedKeywords } from "./ts103-schema-unsupported-keywords.js";
 import { ts104SchemaPermissiveTypes } from "./ts104-schema-permissive-types.js";
 import { ts105SchemaMissingRequired } from "./ts105-schema-missing-required.js";
+import { ts201CompatAdditionalProperties } from "./ts201-compat-additional-properties.js";
+import { ts202CompatRefUsage } from "./ts202-compat-ref-usage.js";
+import { ts203CompatRequiredAll } from "./ts203-compat-required-all.js";
 
 /**
  * All built-in rules. New rules are registered here.
@@ -26,6 +29,9 @@ const BUILT_IN_RULES: Rule[] = [
 	ts103SchemaUnsupportedKeywords,
 	ts104SchemaPermissiveTypes,
 	ts105SchemaMissingRequired,
+	ts201CompatAdditionalProperties,
+	ts202CompatRefUsage,
+	ts203CompatRequiredAll,
 ];
 
 export interface RuleRegistryOptions {

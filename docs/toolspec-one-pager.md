@@ -36,7 +36,7 @@ ToolSpec is a **CLI linter** that scans MCP tool definitions and produces a qual
 
 1. **Description Quality** (TS001–TS006) — Are descriptions clear, complete, and actionable?
 2. **Schema Structure** (TS101–TS105) — Are input schemas well-typed, documented, and constrained?
-3. **Client Compatibility** (planned) — Will schemas work across Claude, OpenAI, Azure Foundry, Cursor?
+3. **Client Compatibility** (TS201–TS203) — Will schemas work across OpenAI strict mode, Azure Foundry, and other clients?
 
 ### Design principles:
 
