@@ -20,12 +20,12 @@ docs/               → Documentation and presentation materials
 
 | File | Source | Score | Purpose |
 |------|--------|-------|---------|
-| `demo-tools.json` | Hand-crafted | 61.4/100 | Mixed quality, original test fixture |
-| `good-server.json` | Hand-crafted | 96.5/100 | Demo: what good looks like |
+| `demo-tools.json` | Hand-crafted | 48.6/100 | Mixed quality, original test fixture |
+| `good-server.json` | Hand-crafted | 82.5/100 | Demo: what good looks like |
 | `bad-server.json` | Hand-crafted | 0/100 | Demo: what bad looks like |
-| `mcp-filesystem-server.json` | Official MCP repo | 74.9/100 | Real-world: 14 tools |
-| `mcp-github-server.json` | GitHub MCP server | 74.4/100 | Real-world: 16 tools |
-| `mcp-fetch-server.json` | Official MCP repo | 73/100 | Real-world: 1 tool |
+| `mcp-filesystem-server.json` | Official MCP repo | 63.5/100 | Real-world: 14 tools |
+| `mcp-github-server.json` | GitHub MCP server | 58.9/100 | Real-world: 16 tools |
+| `mcp-fetch-server.json` | Official MCP repo | 57/100 | Real-world: 1 tool |
 
 ## Key Architecture Decisions
 
@@ -86,7 +86,7 @@ node packages/cli/dist/index.js lint fixtures/demo-tools.json
 
 # Demo scripts:
 npm run lint:demo        # demo-tools.json (mixed quality)
-npm run lint:demo:good   # good-server.json (96.5/100)
+npm run lint:demo:good   # good-server.json (82.5/100)
 npm run lint:demo:bad    # bad-server.json (0/100)
 
 # Run a specific test file:

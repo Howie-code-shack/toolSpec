@@ -27,9 +27,9 @@ The academic taxonomy defines six categories of tool description defects:
 
 ## What ToolSpec Does
 
-ToolSpec is a **CLI linter** that scans MCP tool definitions and produces a quality report. Think of it as ESLint for tool descriptions — it catches problems before they reach production agents.
+ToolSpec is a **CLI linter** with **14 rules** that scans MCP tool definitions and produces a quality report. Think of it as ESLint for tool descriptions — it catches problems before they reach production agents.
 
-**Input:** Tool definitions (JSON file, or MCP server via stdio/HTTP)
+**Input:** Tool definitions (JSON file)
 **Output:** Per-tool quality score (0–100), actionable diagnostics, fix suggestions
 
 ### It checks three dimensions:
@@ -43,17 +43,17 @@ ToolSpec is a **CLI linter** that scans MCP tool definitions and produces a qual
 - **Pure analysis engine** — deterministic, no side effects, same input always produces same output
 - **Rules are functions** — each rule is self-contained, testable, and configurable
 - **Actionable output** — every diagnostic includes a concrete suggestion
-- **CI-ready** — JSON and SARIF output formats, exit codes, severity filtering
+- **CI-ready** — JSON output format, exit codes, severity filtering
 
 ## Real-World Results
 
-Even official MCP servers from Anthropic and GitHub score in the mid-70s:
+Even official MCP servers from Anthropic and GitHub score well below 100:
 
 | Server | Tools | Score | Key Issues |
 |--------|-------|-------|------------|
-| MCP Filesystem Server | 14 | 74.9/100 | Missing param descriptions, no usage guidelines |
-| GitHub MCP Server | 16 | 74.4/100 | No return value docs, no error guidance |
-| MCP Fetch Server | 1 | 73/100 | Undocumented constraints, no output description |
+| MCP Filesystem Server | 14 | 63.5/100 | Missing param descriptions, no usage guidelines, compat gaps |
+| GitHub MCP Server | 16 | 58.9/100 | No return value docs, no error guidance, missing additionalProperties |
+| MCP Fetch Server | 1 | 57/100 | Undocumented constraints, no output description, compat issues |
 
 If the official reference servers have room to improve, every MCP server does.
 
